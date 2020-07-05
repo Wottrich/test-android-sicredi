@@ -19,7 +19,7 @@ buildscript {
             //Api
             'retrofit'            : '2.8.1',
             'loggingInterceptor' : '4.4.0',
-            'picasso'            : '2.5.2',
+            'glide'              : '4.11.0',
 
             //Gradle
             'gradle'             : '4.0.0',
