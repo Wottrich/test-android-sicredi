@@ -17,9 +17,13 @@ import wottrich.github.io.eventcheckin.BuildConfig
 object Network {
 
     private val okHttpClient: OkHttpClient
-        get() = OkHttpClient.Builder()
-            .addLoggingInterceptor()
-            .build()
+        get() {
+            val builder = OkHttpClient.Builder()
+            if (BuildConfig.DEBUG) {
+                builder.addLoggingInterceptor()
+            }
+            return builder.build()
+        }
 
     val api: INetworkAPI
         get() = Retrofit.Builder()
