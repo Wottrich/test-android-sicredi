@@ -1,8 +1,6 @@
 package wottrich.github.io.eventcheckin.data.api
 
 import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import wottrich.github.io.eventcheckin.BuildConfig
 
 /**
@@ -16,7 +14,7 @@ import wottrich.github.io.eventcheckin.BuildConfig
 
 object Network {
 
-    private val okHttpClient: OkHttpClient
+    val okHttpClient: OkHttpClient
         get() {
             val builder = OkHttpClient.Builder()
             if (BuildConfig.DEBUG) {
@@ -24,13 +22,5 @@ object Network {
             }
             return builder.build()
         }
-
-    val api: INetworkAPI
-        get() = Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
-            .create(INetworkAPI::class.java)
 
 }

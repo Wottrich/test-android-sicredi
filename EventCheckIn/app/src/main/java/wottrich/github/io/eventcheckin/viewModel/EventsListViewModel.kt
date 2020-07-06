@@ -44,7 +44,7 @@ class EventsListViewModel (
         get() = mEvents
 
     private val service: EventDataSource
-        get () = EventDataSource(Network.api)
+        get () = EventDataSource()
 
     fun loadEvents () {
         isLoading.value = true

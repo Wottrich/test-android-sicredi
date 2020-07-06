@@ -42,7 +42,7 @@ class EventDetailViewModel(
         get() = mSuccessCheckIn
 
     private val service: EventDataSource
-        get() = EventDataSource(Network.api)
+        get() = EventDataSource()
 
     fun loadEventDetails (intent: Intent) {
         val key = EventsListViewModel.KEY_EXTRA_EVENT_ID

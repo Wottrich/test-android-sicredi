@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import wottrich.github.io.eventcheckin.R
 import wottrich.github.io.eventcheckin.archive.showAlert
 import wottrich.github.io.eventcheckin.databinding.ActivityEventsListBinding

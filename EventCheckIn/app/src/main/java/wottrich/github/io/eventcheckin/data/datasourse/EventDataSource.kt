@@ -15,7 +15,7 @@ import wottrich.github.io.eventcheckin.model.Event
  */
 
 class EventDataSource(
-    private val api: INetworkAPI
+    private val api: INetworkAPI = INetworkAPI.api
 ) {
 
     suspend fun loadEvents(): List<Event>? {
