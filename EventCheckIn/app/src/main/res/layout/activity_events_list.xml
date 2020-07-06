@@ -6,7 +6,6 @@
     <data>
 
         <import type="androidx.lifecycle.LiveData" />
-
         <import type="wottrich.github.io.eventcheckin.viewModel.EventsListViewModel" />
 
         <variable

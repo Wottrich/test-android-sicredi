@@ -1,5 +1,6 @@
 package wottrich.github.io.eventcheckin.data.api
 
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -24,6 +25,6 @@ interface INetworkAPI {
     suspend fun getEventDetail (@Path("event_id") eventId: String) : Event
 
     @POST("checkin")
-    suspend fun postEventCheckIn (@Body body: HashMap<String, Any>)
+    suspend fun postEventCheckIn (@Body body: HashMap<String, Any>) : Any?
 
 }

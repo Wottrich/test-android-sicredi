@@ -1,10 +1,35 @@
 <resources>
     <string name="app_name">EventCheckIn</string>
-    <string name="title_activity_event">Eventos</string>
+    <string name="title_activity_event">Bem-vindo(a)!</string>
     <string name="no_title">Nome do evento não informado</string>
     <string name="content_description_event_image">Imagem do evento</string>
-    <string name="row_event_format_date">Data do evento: %s</string>
     <string name="row_event_click_see_more">Clique para ver mais</string>
     <string name="default_title_error">Atenção</string>
+    <string name="default_body_error">Ocorreu um erro desconhecido.\nPor favor, tente novamente mais tarde.</string>
     <string name="load_events_failure">Infelizmente não conseguimos carregar a lista de eventos.\nPor favor, tente novamente mais tarde.</string>
+    <string name="check_in_error_message">Não foi possivel fazer check-in neste evento.\nPor favor, tente novamente mais tarde.</string>
+
+    <string name="event_detail_title">Detalhes do evento</string>
+    <string name="event_detail_error_message">Não foi possivel carregar os detalhes do evento.</string>
+    <string name="event_detail_see_location">Ver localização</string>
+    <string name="event_detail_check_in">Check-In</string>
+    <string name="event_detail_content_description_check_in">Fazer Check-In</string>
+    <string name="event_detail_format_date">Data do evento: %s</string>
+    <string name="event_detail_format_price">Preço: %s</string>
+    <string name="event_detail_format_people">%s pessoa(s)</string>
+    <string name="event_detail_confirm_label">Gostaria de confirmar sua presença no evento?</string>
+    <string name="event_detail_date_event_label">Data do evento:</string>
+    <string name="event_detail_price_event_label">Preço:</string>
+    <string name="event_detail_people_event_label">Pessoas confirmadas:</string>
+    <string name="event_detail_description_event_label">Descrição:</string>
+    <string name="event_detail_success_check_in_message_title">Check-in realizado!!</string>
+    <string name="event_detail_success_check_in_message_body">Agora é só aguardar a data do evento :)</string>
+    <string name="settings">Settings</string>
+    <string name="events_title">Eventos</string>
+    <string name="close_dialog">fechar dialog</string>
+    <string name="dialog_check_in_type_email_hint">Ex.: lucas@gmail.com</string>
+    <string name="dialog_check_in_type_name_hint">Ex.: Lucas da Silva</string>
+    <string name="dialog_check_in_type_name_label">Informe seu nome:</string>
+    <string name="dialog_check_in_type_email_label">Informe seu email:</string>
+    <string name="dialog_check_in_button_confirm">Confirmar check-in</string>
 </resources>

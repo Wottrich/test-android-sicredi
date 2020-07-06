@@ -6,6 +6,8 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import wottrich.github.io.eventcheckin.R
 import wottrich.github.io.eventcheckin.archive.showAlert
 import wottrich.github.io.eventcheckin.databinding.ActivityEventsListBinding
@@ -20,8 +22,9 @@ class EventsListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        title = getString(R.string.events_title)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_events_list)
-        viewModel = EventsListViewModel()
+        viewModel = ViewModelProvider(this)[EventsListViewModel::class.java]
 
         setupBinding()
         setupRecycler()
@@ -72,7 +75,7 @@ class EventsListActivity : AppCompatActivity() {
         })
 
         viewModel.onError.observe(this, Observer {
-            showAlert(getString(R.string.default_title_error), getString(it))
+            showAlert(message = it ?: R.string.default_body_error)
         })
 
     }
