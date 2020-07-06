@@ -1,8 +1,10 @@
 package wottrich.github.io.eventcheckin.model
 
 import com.google.gson.annotations.SerializedName
+import wottrich.github.io.eventcheckin.archive.projectLocale
 import java.lang.Exception
-import java.text.DateFormat
+import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,21 +33,43 @@ data class Event(
 
 ) {
 
-    fun formatDate () : String {
+    fun formattedPrice () : String {
+        if (price == null) {
+            return "Valor não informado"
+        }
+
+        val formatter = NumberFormat.getCurrencyInstance(projectLocale)
+        if (formatter is DecimalFormat) {
+            formatter.isDecimalSeparatorAlwaysShown = true
+        }
+
+        return formatter.format(price)
+    }
+
+    fun formatDate (withLabel: Boolean = true) : String {
         if (date == null) {
             return ""
         }
 
-        val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val formatter = SimpleDateFormat("dd/MM/yyyy", projectLocale)
         val dateConverted = Date(date)
 
         return try {
             val dateFormatted = formatter.format(dateConverted)
-            "Data do evento: $dateFormatted"
+            if (withLabel) "Data do evento: $dateFormatted"
+            else dateFormatted
         } catch (e: Exception) {
             "Data não informada"
         }
 
+    }
+
+    fun numberOfPeople () : String {
+        return "${people?.size ?: 0} pessoa(s)"
+    }
+
+    override fun toString(): String {
+        return "Evento: $title \nDescrição do evento:\n$description"
     }
 
 }

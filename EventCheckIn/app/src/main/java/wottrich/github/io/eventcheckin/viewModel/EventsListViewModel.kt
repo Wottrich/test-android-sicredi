@@ -11,6 +11,7 @@ import wottrich.github.io.eventcheckin.R
 import wottrich.github.io.eventcheckin.data.api.Network
 import wottrich.github.io.eventcheckin.data.datasourse.EventDataSource
 import wottrich.github.io.eventcheckin.model.Event
+import wottrich.github.io.eventcheckin.view.EventDetailActivity
 import wottrich.github.io.eventcheckin.view.EventsListActivity
 import java.lang.Exception
 import kotlin.coroutines.CoroutineContext
@@ -61,7 +62,7 @@ class EventsListViewModel (
     }
 
     fun onItemClick (context: Context, eventId: String) {
-        val intent = Intent(context, EventsListActivity::class.java)
+        val intent = Intent(context, EventDetailActivity::class.java)
         intent.putExtra(KEY_EXTRA_EVENT_ID, eventId)
         activityToGo.value = intent
     }

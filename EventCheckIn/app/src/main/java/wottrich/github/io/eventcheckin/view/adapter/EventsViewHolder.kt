@@ -20,7 +20,7 @@ class EventsViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun setOnClick (hof: (Int) -> Unit) {
-        binding.root.setOnClickListener { hof.invoke(absoluteAdapterPosition) }
+        itemView.setOnClickListener { hof.invoke(absoluteAdapterPosition) }
     }
 
     fun bind (imageUrl: String) {

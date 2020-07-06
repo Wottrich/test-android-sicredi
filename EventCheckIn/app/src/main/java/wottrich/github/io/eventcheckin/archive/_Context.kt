@@ -2,6 +2,8 @@ package wottrich.github.io.eventcheckin.archive
 
 import android.app.AlertDialog
 import android.content.Context
+import androidx.annotation.StringRes
+import wottrich.github.io.eventcheckin.R
 
 /**
  * @author Wottrich
@@ -12,7 +14,7 @@ import android.content.Context
  *
  */
  
-fun Context.showAlert (title: String, message: String, callback: (() -> Unit)? = null) {
+fun Context.showAlert (@StringRes title: Int = R.string.default_title_error, @StringRes message: Int, callback: (() -> Unit)? = null) {
     val alert = AlertDialog.Builder(this)
     alert.setTitle(title)
     alert.setMessage(message)
