@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="date"
+            type="String" />
+
+        <variable
+            name="description"
+            type="String" />
+
+        <variable
+            name="showDescription"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textSize="@dimen/row_event_title_size"
+                    android:textColor="@android:color/black"
+                    tools:text="Feira de adoção de animais na Redenção"
+                    android:text='@{ title }'
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginBottom="4dp"
+                    android:textSize="@dimen/row_event_date_size"
+                    tools:text="Data do evento: 20/12/2020"
+                    android:text="@{ date }"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:textStyle="bold"
+                    android:textSize="@dimen/row_event_description_size"
+                    tools:text="O Patas Dadas estará na Redenção, nesse domingo, com cães para adoção e produtos à venda!Na ocasião, teremos bottons, bloquinhos e camisetas!\n\nTraga seu Pet, os amigos e o chima, e venha aproveitar esse dia de sol com a gente e com alguns de nossos peludinhos"
+                    android:text='@{ description }'
+                    android:visibility='@{ showDescription ? View.VISIBLE : View.GONE }'
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="@dimen/row_event_date_size"
+                    android:text="@string/row_event_click_see_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:id="@+id/ivEvent"
+                android:contentDescription="@string/content_description_event_image"
+                android:layout_gravity="center"
+                tools:src="@drawable/ic_image_placeholder"
+                android:scaleType="centerCrop"
+                android:layout_width="62dp"
+                android:layout_height="62dp"/>
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

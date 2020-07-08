@@ -18,8 +18,8 @@ buildscript {
 
             //Api
             'retrofit'            : '2.8.1',
-            'loggingInterceptor' : '4.4.0',
-            'picasso'            : '2.5.2',
+            'loggingInterceptor' : '3.12.12',
+            'glide'              : '4.11.0',
 
             //Gradle
             'gradle'             : '4.0.0',
@@ -29,10 +29,13 @@ buildscript {
             'androidXJUnit'      : '1.1.1',
             'androidXTestCore'   : '1.2.0',
 
-            'junit'              : '4.12',
+            'junit'              : '4.13',
+            'junitX'             : '1.1.1',
+            'espressoX'          : '3.2.0',
+            'testCoreX'          : '1.2.0',
             'mockito'            : '3.1.0',
             'mockitoKotlin'      : '2.2.0',
-            'mockWebServer'      : '4.4.0',
+            'mockWebServer'      : '3.12.12',
             'robolectric'        : '4.3.1'
     ]
     ext.kotlin_version = "1.3.72"
