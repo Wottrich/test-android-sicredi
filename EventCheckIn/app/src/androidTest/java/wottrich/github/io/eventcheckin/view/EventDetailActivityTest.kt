@@ -9,6 +9,7 @@ import android.content.Intent
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.core.internal.deps.guava.collect.Iterables
 import androidx.test.espresso.intent.Intents
@@ -59,7 +60,6 @@ open class EventDetailActivityTest {
 
         onView(withId(R.id.btnCheckIn))
             .perform(click())
-            .check(matches(isDisplayed()))
 
     }
 

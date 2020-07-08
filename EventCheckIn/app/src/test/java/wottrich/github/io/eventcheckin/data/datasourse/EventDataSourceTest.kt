@@ -7,6 +7,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.Matchers.equalTo
+import org.hamcrest.Matchers.notNullValue
 import org.junit.Before
 
 import org.junit.Assert.*
@@ -54,6 +55,12 @@ class EventDataSourceTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         this.sut = EventDataSource(apiMock)
+    }
+
+    @Test
+    fun `should load sut with default properties` () {
+        this.sut = EventDataSource()
+        assertThat(sut, notNullValue())
     }
 
     @Test
