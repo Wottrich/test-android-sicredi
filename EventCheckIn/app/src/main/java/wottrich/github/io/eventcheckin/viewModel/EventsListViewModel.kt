@@ -3,6 +3,7 @@ package wottrich.github.io.eventcheckin.viewModel
 import android.content.Context
 import android.content.Intent
 import android.location.Location
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -26,28 +27,24 @@ import kotlin.coroutines.CoroutineContext
  */
  
 class EventsListViewModel (
+    private val service: EventDataSource = EventDataSource(),
     context: CoroutineContext = IO
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
     companion object {
         const val KEY_EXTRA_EVENT_ID = "keyEventId_EventsListActivityToEventDetailActivity"
     }
 
-    private val scope = CoroutineScope(context)
-
-    private val mActivityToGo: MutableLiveData<Intent> = MutableLiveData()
-    val activityToGo: MutableLiveData<Intent>
-        get() = mActivityToGo
-
     private val mEvents: MutableLiveData<List<Event>> = MutableLiveData()
-    val events: MutableLiveData<List<Event>>
+    val events: LiveData<List<Event>>
         get() = mEvents
 
-    private val service: EventDataSource
-        get () = EventDataSource()
+    private val mEventIdClicked: MutableLiveData<String> = MutableLiveData()
+    val eventIdClicked: LiveData<String>
+        get() = mEventIdClicked
 
     fun loadEvents () {
-        isLoading.value = true
+        isLoading.postValue(true)
 
         scope.launch {
             try {
@@ -61,10 +58,8 @@ class EventsListViewModel (
         }
     }
 
-    fun onItemClick (context: Context, eventId: String) {
-        val intent = Intent(context, EventDetailActivity::class.java)
-        intent.putExtra(KEY_EXTRA_EVENT_ID, eventId)
-        activityToGo.value = intent
+    fun onItemClick (eventId: String) {
+        mEventIdClicked.value = eventId
     }
 
 }

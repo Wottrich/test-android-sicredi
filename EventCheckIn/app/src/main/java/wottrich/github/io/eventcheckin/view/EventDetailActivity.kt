@@ -8,9 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import wottrich.github.io.eventcheckin.R
-import wottrich.github.io.eventcheckin.archive.openMap
-import wottrich.github.io.eventcheckin.archive.shareText
-import wottrich.github.io.eventcheckin.archive.showAlert
+import wottrich.github.io.eventcheckin.archive.*
 import wottrich.github.io.eventcheckin.databinding.ActivityEventDetailBinding
 import wottrich.github.io.eventcheckin.view.dialog.CheckInDialog
 import wottrich.github.io.eventcheckin.viewModel.EventDetailViewModel
@@ -34,7 +32,7 @@ class EventDetailActivity : AppCompatActivity() {
         setupListeners()
         setupObservers()
 
-        viewModel.loadEventDetails(intent)
+        viewModel.loadEventDetails(intent.extras)
 
     }
 
@@ -62,8 +60,7 @@ class EventDetailActivity : AppCompatActivity() {
         binding.btnCheckIn.setOnClickListener {
             CheckInDialog.show(
                 supportFragmentManager,
-                viewModel::confirmCheckIn,
-                viewModel::setError
+                viewModel::confirmCheckIn
             )
         }
 
@@ -78,6 +75,9 @@ class EventDetailActivity : AppCompatActivity() {
                     .centerCrop()
                     .placeholder(R.drawable.ic_image_placeholder)
                     .into(binding.ivEvent)
+
+                binding.priceFormatted = it.price.formattedPrice()
+                binding.dateFormatted = it.date.formatDate(withLabel = false)
             }
         })
 

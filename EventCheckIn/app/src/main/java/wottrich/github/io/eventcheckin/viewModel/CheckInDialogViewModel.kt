@@ -1,5 +1,6 @@
 package wottrich.github.io.eventcheckin.viewModel
 
+import android.util.Log
 import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.LiveData
@@ -35,18 +36,14 @@ class CheckInDialogViewModel : ViewModel() {
     val formIsValid: Boolean
         get() = formIsValidLiveData.value ?: false
 
-    fun watchers (nameEditText: EditText, emailEditText: EditText) {
+    fun setName (name: String) {
+        mName.value = name
+        validForm()
+    }
 
-        nameEditText.doAfterTextChanged {
-            mName.value = it.toString()
-            validForm()
-        }
-
-        emailEditText.doAfterTextChanged {
-            mEmail.value = it.toString()
-            validForm()
-        }
-
+    fun setEmail (email: String) {
+        mEmail.value = email
+        validForm()
     }
 
     private fun validForm () {

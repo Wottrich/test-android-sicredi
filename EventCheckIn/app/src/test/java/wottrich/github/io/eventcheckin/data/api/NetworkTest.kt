@@ -2,8 +2,10 @@ package wottrich.github.io.eventcheckin.data.api
 
 import android.os.Build
 import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import org.hamcrest.Matchers.hasSize
 import org.hamcrest.Matchers.notNullValue
 import org.junit.Assert.assertThat
 import org.junit.Test
@@ -41,8 +43,8 @@ class NetworkTest {
         val okHttpClient = Network.okHttpClient
 
         //if have interceptor
-//        val interceptors = okHttpClient.networkInterceptors()
-//        assertThat(interceptors.filterIsInstance<HttpLoggingInterceptor>(), hasSize(1))
+        val interceptors = okHttpClient.interceptors()
+        assertThat(interceptors.filterIsInstance<HttpLoggingInterceptor>(), hasSize(1))
 
         okHttpClient.newCall(Request.Builder().url(mockWebServer.url("/")).build()).execute()
 

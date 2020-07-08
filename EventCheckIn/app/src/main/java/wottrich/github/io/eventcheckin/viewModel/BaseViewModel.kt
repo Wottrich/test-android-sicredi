@@ -2,6 +2,8 @@ package wottrich.github.io.eventcheckin.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlin.coroutines.CoroutineContext
 
 /**
  * @author Wottrich
@@ -12,7 +14,11 @@ import androidx.lifecycle.ViewModel
  *
  */
  
-abstract class BaseViewModel: ViewModel() {
+abstract class BaseViewModel(
+    final override val coroutineContext: CoroutineContext
+): ViewModel(), CoroutineScope {
+
+    protected val scope = CoroutineScope(coroutineContext)
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
     val onError: MutableLiveData<Int> = MutableLiveData()

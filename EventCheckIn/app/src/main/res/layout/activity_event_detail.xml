@@ -6,11 +6,20 @@
     <data>
         <import type="android.view.View"/>
         <import type="androidx.lifecycle.LiveData" />
+        <import type="wottrich.github.io.eventcheckin.archive._FormattersKt"/>
         <import type="wottrich.github.io.eventcheckin.model.Event" />
 
         <variable
             name="event"
             type="LiveData&lt;Event&gt;" />
+
+        <variable
+            name="priceFormatted"
+            type="String" />
+
+        <variable
+            name="dateFormatted"
+            type="String" />
 
         <variable
             name="isLoading"
@@ -106,8 +115,8 @@
                             style="@style/TextDetail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:contentDescription="@{ event.formatDate(false) }"
-                            android:text="@{ event.formatDate(false) }"
+                            android:contentDescription="@{ dateFormatted }"
+                            android:text="@{ dateFormatted }"
                             tools:text="20/12/2020" />
 
                         <TextView
@@ -120,8 +129,8 @@
                             style="@style/TextDetail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:contentDescription="@{ event.formattedPrice() }"
-                            android:text="@{ event.formattedPrice() }"
+                            android:contentDescription="@{ priceFormatted }"
+                            android:text="@{ priceFormatted }"
                             tools:text="R$ 29,99" />
 
                         <TextView

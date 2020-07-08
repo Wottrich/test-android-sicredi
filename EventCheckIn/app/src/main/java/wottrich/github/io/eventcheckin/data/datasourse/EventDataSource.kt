@@ -26,7 +26,7 @@ class EventDataSource(
         return api.getEventDetail(id)
     }
 
-    suspend fun sendEventCheckIn(name: String, email: String, eventId: String): Any? {
+    suspend fun sendEventCheckIn(name: String, email: String, eventId: String): Any?  {
         val body = HashMap<String, Any>().apply {
             "name" to name
             "email" to email

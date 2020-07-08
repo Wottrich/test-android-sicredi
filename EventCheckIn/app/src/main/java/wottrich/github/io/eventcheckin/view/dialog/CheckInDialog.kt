@@ -1,12 +1,12 @@
 package wottrich.github.io.eventcheckin.view.dialog
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -31,25 +31,15 @@ class CheckInDialog : DialogFragment() {
     private lateinit var root: View
 
     var onConfirmCheckIn: ((name: String, email: String) -> Unit)? = null
-    var onError: ((errorMessage: Int) -> Unit)? = null
 
     companion object {
         fun show(
             fragmentManager: FragmentManager,
-            onConfirmCheckIn: (name: String, email: String) -> Unit,
-            onError: (errorMessage: Int) -> Unit
+            onConfirmCheckIn: (name: String, email: String) -> Unit
         ) {
-
             val newFragment = CheckInDialog()
             newFragment.onConfirmCheckIn = onConfirmCheckIn
-            newFragment.onError = onError
-
-            val transaction = fragmentManager.beginTransaction()
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            transaction.add(android.R.id.content, newFragment)
-                .addToBackStack(null)
-                .commit()
-
+            newFragment.show(fragmentManager, "CheckInDialog")
         }
     }
 
@@ -67,6 +57,17 @@ class CheckInDialog : DialogFragment() {
         return dialog
     }
 
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.attributes?.let {
+            it.width = ViewGroup.LayoutParams.MATCH_PARENT
+            it.height = ViewGroup.LayoutParams.MATCH_PARENT
+            it.dimAmount = 0f
+        }
+        dialog?.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         this.root = view
@@ -82,14 +83,31 @@ class CheckInDialog : DialogFragment() {
             if (viewModel.formIsValid && onConfirmCheckIn != null) {
                 onConfirmCheckIn?.invoke(viewModel.name, viewModel.email)
             } else {
-                onError?.invoke(R.string.check_in_error_message)
+                Toast.makeText(requireActivity(), getString(R.string.check_in_dialog_complete_form), Toast.LENGTH_SHORT).show()
             }
-            dismiss()
+            dismissDialog()
+        }
+
+        this.root.ibClose.setOnClickListener {
+            dismissDialog()
         }
     }
 
+    private fun dismissDialog() {
+        dismissAllowingStateLoss()
+        requireActivity().supportFragmentManager.popBackStack()
+    }
+
     private fun setupWatchers () {
-        viewModel.watchers(root.etName, root.etEmail)
+
+        root.etName.doAfterTextChanged {
+            viewModel.setName(it.toString())
+        }
+
+        root.etEmail.doAfterTextChanged {
+            viewModel.setEmail(it.toString())
+        }
+
     }
 
     private fun setupObservers () {

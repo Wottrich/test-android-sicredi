@@ -33,37 +33,6 @@ data class Event(
 
 ) {
 
-    fun formattedPrice () : String {
-        if (price == null) {
-            return "Valor não informado"
-        }
-
-        val formatter = NumberFormat.getCurrencyInstance(projectLocale)
-        if (formatter is DecimalFormat) {
-            formatter.isDecimalSeparatorAlwaysShown = true
-        }
-
-        return formatter.format(price)
-    }
-
-    fun formatDate (withLabel: Boolean = true) : String {
-        if (date == null) {
-            return ""
-        }
-
-        val formatter = SimpleDateFormat("dd/MM/yyyy", projectLocale)
-        val dateConverted = Date(date)
-
-        return try {
-            val dateFormatted = formatter.format(dateConverted)
-            if (withLabel) "Data do evento: $dateFormatted"
-            else dateFormatted
-        } catch (e: Exception) {
-            "Data não informada"
-        }
-
-    }
-
     fun numberOfPeople () : String {
         return "${people?.size ?: 0} pessoa(s)"
     }

@@ -1,5 +1,6 @@
 package wottrich.github.io.eventcheckin.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -54,7 +55,7 @@ class EventsListActivity : AppCompatActivity() {
             bind.rvEvents.apply {
                 adapter = EventsAdapter(activity, activity.viewModel.events).apply {
                     this.setOnClick { eventId ->
-                        activity.viewModel.onItemClick(activity, eventId)
+                        activity.viewModel.onItemClick(eventId)
                     }
                 }
             }
@@ -63,9 +64,12 @@ class EventsListActivity : AppCompatActivity() {
 
     private fun setupObservers () {
 
-        viewModel.activityToGo.observe(this, Observer {
+        viewModel.eventIdClicked.observe(this, Observer {
             if (it != null) {
-                startActivity(it)
+                val intent = Intent(this, EventDetailActivity::class.java).apply {
+                    putExtra(EventsListViewModel.KEY_EXTRA_EVENT_ID, it)
+                }
+                startActivity(intent)
             }
         })
 

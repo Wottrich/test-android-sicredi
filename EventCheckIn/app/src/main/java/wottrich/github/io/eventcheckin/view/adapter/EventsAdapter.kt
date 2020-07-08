@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import wottrich.github.io.eventcheckin.R
+import wottrich.github.io.eventcheckin.archive.formatDate
 import wottrich.github.io.eventcheckin.model.Event
 
 /**
@@ -43,7 +44,7 @@ class EventsAdapter(
 
         holder.binding.apply {
             title = event.title ?: "Nome do evento não informado"
-            date = event.formatDate()
+            date = event.date.formatDate()
             description = (event.description ?: "").replace("\n", "")
             showDescription = event.description != null && event.description.isNotEmpty()
         }

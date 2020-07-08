@@ -1,6 +1,7 @@
 package wottrich.github.io.eventcheckin.viewModel
 
 import android.content.Intent
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
@@ -24,14 +25,13 @@ import kotlin.coroutines.CoroutineContext
  * Copyright © 2020 EventCheckIn. All rights reserved.
  *
  */
- 
+
 class EventDetailViewModel(
+    private val service: EventDataSource = EventDataSource(),
     context: CoroutineContext = IO
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
     private var eventId: String? = null
-
-    private val scope = CoroutineScope(context)
 
     private val mEvent: MutableLiveData<Event> = MutableLiveData()
     val event: LiveData<Event>
@@ -41,16 +41,13 @@ class EventDetailViewModel(
     val successCheckIn: LiveData<Boolean>
         get() = mSuccessCheckIn
 
-    private val service: EventDataSource
-        get() = EventDataSource()
-
-    fun loadEventDetails (intent: Intent) {
+    fun loadEventDetails(bundle: Bundle?) {
         val key = EventsListViewModel.KEY_EXTRA_EVENT_ID
-        if (intent.hasExtra(key)) {
 
-            val eventId = intent.getStringExtra(key)
+        bundle?.let {
+            val eventId = it.getString(key)
 
-            if(eventId != null && !eventId.isNullOrEmpty()) {
+            if (eventId != null && !eventId.isNullOrEmpty()) {
                 this.eventId = eventId
                 isLoading.value = true
 
@@ -70,20 +67,18 @@ class EventDetailViewModel(
             } else {
                 sendDetailError()
             }
-
-        } else {
-            sendDetailError()
         }
 
     }
 
-    fun confirmCheckIn (name: String, email: String) {
+    fun confirmCheckIn(name: String, email: String) {
         val eventId = this.eventId
         if (eventId != null) {
             isLoading.value = true
             scope.launch {
                 try {
                     service.sendEventCheckIn(name, email, eventId)
+                    mSuccessCheckIn.postValue(true)
                 } catch (e: Exception) {
                     mSuccessCheckIn.postValue(false)
                 } finally {
@@ -96,15 +91,11 @@ class EventDetailViewModel(
 
     }
 
-    fun setError (errorMessage: Int) {
-        onError.value = errorMessage
-    }
-
-    private fun sendDetailError () {
+    private fun sendDetailError() {
         onError.value = R.string.event_detail_error_message
     }
 
-    private fun sendCheckInError () {
+    private fun sendCheckInError() {
         mSuccessCheckIn.value = false
     }
 
