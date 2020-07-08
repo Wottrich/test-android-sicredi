@@ -6,6 +6,7 @@ O Objetivo do projeto era criar um aplicativo que consuma uma REST API, exibir a
 # Arquitetura e dependencias
 
 **Arquitetura**
+
 A arquitetura escolhida para o desenvolvimento foi a _Model View ViewModel(MVVM)_. Esta arquitetura foi escolhida para atuar em conjunto com o **DataBinding** facilitanto o código e beneficiando os testes.
 
 Blueprint:
